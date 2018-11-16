@@ -4,4 +4,9 @@
 # Examples:
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+#   Character.create(name: 'Luke', movie: movies.first)3.times do
+
+10.times do
+  Thermostat.create(household_token: SecureRandom.uuid,
+                        location: Faker::Address.full_address)
+end
