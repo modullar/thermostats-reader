@@ -1,5 +1,14 @@
 class Reading < ApplicationRecord
   belongs_to :thermostat
 
-  acts_as_sequenced column: :number, scope: :thermostat_id
+
+  before_save :increment_thermostat_total_readings
+
+
+  private
+
+  def increment_thermostat_total_readings
+    self.thermostat.increment_total_readings
+  end
+
 end

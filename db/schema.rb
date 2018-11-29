@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_17_174719) do
+ActiveRecord::Schema.define(version: 2018_11_30_142530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "uuid-ossp"
 
   create_table "readings", force: :cascade do |t|
-    t.integer "number"
+    t.string "number"
     t.float "temperature"
     t.float "humidity"
     t.float "battery_charge"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "thermostat_id"
+    t.index ["number"], name: "index_readings_on_number"
     t.index ["thermostat_id"], name: "index_readings_on_thermostat_id"
   end
 
@@ -31,6 +33,8 @@ ActiveRecord::Schema.define(version: 2018_11_17_174719) do
     t.string "location"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "total_readings", default: 0
+    t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
   end
 
   add_foreign_key "readings", "thermostats"
