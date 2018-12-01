@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_142530) do
+ActiveRecord::Schema.define(version: 2018_11_30_142714) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,6 +35,15 @@ ActiveRecord::Schema.define(version: 2018_11_30_142530) do
     t.datetime "updated_at", null: false
     t.integer "total_readings", default: 0
     t.uuid "uuid", default: -> { "uuid_generate_v4()" }, null: false
+    t.float "max_temperature", default: -1000.0
+    t.float "min_temperature", default: 1000.0
+    t.float "max_battery_charge", default: -100000.0
+    t.float "min_battery_charge", default: 100000.0
+    t.float "max_humidity", default: 0.0
+    t.float "min_humidity", default: 100.0
+    t.float "average_humidity", default: 0.0
+    t.float "average_temperature", default: 0.0
+    t.float "average_battery_charge", default: 0.0
   end
 
   add_foreign_key "readings", "thermostats"

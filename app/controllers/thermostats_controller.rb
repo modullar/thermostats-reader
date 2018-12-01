@@ -1,42 +1,9 @@
 class ThermostatsController < ApplicationController
-  before_action :authenticate
-  before_action :set_thermostat, only: [:show, :update, :destroy]
-
-  # GET /thermostats
-  def index
-    @thermostats = Thermostat.all
-
-    render json: @thermostats
-  end
+  before_action :set_thermostat, only: :show
 
   # GET /thermostats/1
   def show
     render json: @thermostat
-  end
-
-  # POST /thermostats
-  def create
-    @thermostat = Thermostat.new(thermostat_params)
-
-    if @thermostat.save
-      render json: @thermostat, status: :created, location: @thermostat
-    else
-      render json: @thermostat.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /thermostats/1
-  def update
-    if @thermostat.update(thermostat_params)
-      render json: @thermostat
-    else
-      render json: @thermostat.errors, status: :unprocessable_entity
-    end
-  end
-
-  # DELETE /thermostats/1
-  def destroy
-    @thermostat.destroy
   end
 
   private

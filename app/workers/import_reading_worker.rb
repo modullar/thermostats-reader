@@ -28,6 +28,11 @@ class ImportReadingWorker
     }
   end
 
+  def self.retrieve_readings_by_thermostat_uuid(thermostat_uuid)
+    readings = Sidekiq::Queue.new.select{
+      |q| q.klass == self.name && Regexp.new(thermostat_uuid).match(q.args[3]) }
+  end
+
   private
 
   def self.find_reading_data(number)

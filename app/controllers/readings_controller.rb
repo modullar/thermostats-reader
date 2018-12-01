@@ -20,8 +20,7 @@ class ReadingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_reading
-      @reading = Reading.find_by(number: params[:id]) ||
-        ImportReadingWorker.find_reading_by_number(params[:id])
+      @reading = Reading.retrieve_reading_by_number(params[:id])
     end
 
     def push_to_worker
