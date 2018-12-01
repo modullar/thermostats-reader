@@ -1,24 +1,26 @@
-# README
+# Requirements:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 2.5.1
+* Rails version: 5.2.1
+* Sidekiq installed and run
+* Postgres database
 
-Things you may want to cover:
+# Run Applicatoin:
+From the command line do the following
 
-* Ruby version
+* `bundle install`
+* `bundle exec rake db:create db:schema:load db:migrate db:seed`
+* `sidekiq`
 
-* System dependencies
+To run the test
+* `bundle exec rspec`
 
-* Configuration
+You could test the API using `Postman` against the following endpoint:
 
-* Database creation
+- POST /readings
+- GET /readings/:id
+- GET /stats/:id
 
-* Database initialization
+# Database creation
+Edit your username and password from `database.yml` file.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
