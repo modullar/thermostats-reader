@@ -21,6 +21,8 @@ You could test the API using `Postman` against the following endpoint:
 - GET /readings/:id
 - GET /stats/:id
 
+You could also visit http://localhost:3000/api-docs/ and test the API directly from there.
 # Database creation
 Edit your username and password from `database.yml` file.
+
 
