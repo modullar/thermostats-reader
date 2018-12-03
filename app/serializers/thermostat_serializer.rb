@@ -7,7 +7,7 @@ class ThermostatSerializer < ActiveModel::Serializer
 
   def data
     pending_readings = readings_in_worker
-    return default_attributes if pending_readings.empty?
+    return default_attributes if pending_readings.blank?
     new_attributes(pending_readings)
   end
 

@@ -8,6 +8,9 @@ RSpec.describe ThermostatsController do
   let!(:reading){ FactoryBot.create(:reading, thermostat: thermostat) }
 
   describe 'GET #show' do
+    before do
+      allow_any_instance_of(ThermostatSerializer).to receive(:readings_in_worker).and_return([])
+    end
 
     it 'must returns the thermostat detail of the posted readings' do
       get :show, params: {id: thermostat.id}

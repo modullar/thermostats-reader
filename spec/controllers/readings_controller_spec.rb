@@ -16,10 +16,10 @@ RSpec.describe ReadingsController do
     end
 
     context 'authorized request' do
-      it 'must create a background job to create the resource & returns 201 status with a valid response' do
+      it 'must create a background job to create the resource & returns 200 status with a valid response' do
         request.headers['Authorization'] = "Token #{thermostat.household_token}"
         post :create, params: {reading: reading_params}, format: :json
-        expect(response.status).to eq 201
+        expect(response.status).to eq 200
         expect(response.body).to eq({number: "#{thermostat.reload.uuid}-1"}.to_json)
         expect(ImportReadingWorker.jobs.size).to eq 1
       end

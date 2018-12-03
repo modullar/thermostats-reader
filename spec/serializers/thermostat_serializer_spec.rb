@@ -16,6 +16,11 @@ RSpec.describe ThermostatSerializer, type: :model do
   let(:subject) { JSON.parse(serialization.to_json) }
 
   context 'no readings in worker' do
+
+    before do
+      allow_any_instance_of(ThermostatSerializer).to receive(:readings_in_worker).and_return([])
+    end
+
     it 'has a maximum temperature equal to 2' do
       expect(subject['data']['max_temperature']).to eq 2
     end

@@ -29,14 +29,18 @@ class ImportReadingWorker
   end
 
   def self.retrieve_readings_by_thermostat_uuid(thermostat_uuid)
-    readings = Sidekiq::Queue.new.select{
+    readings = Sidekiq::Queue.new
+    return nil if readings.size == 0
+    readings.select{
       |q| q.klass == self.name && Regexp.new(thermostat_uuid).match(q.args[3]) }
   end
 
   private
 
   def self.find_reading_data(number)
-    reading_args = Sidekiq::Queue.new.select{
+    reading_args = Sidekiq::Queue.new
+    return nil if readings.size == 0
+    reading_args.select{
       |q| q.klass == self.name && q.args[3] ==  number }.first&.args
   end
 

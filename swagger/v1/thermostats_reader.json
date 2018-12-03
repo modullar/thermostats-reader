@@ -1,0 +1,150 @@
+{
+  "securityDefinitions": {
+    "token": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "token": {
+      }
+    }
+  ],
+  "swagger": "2.0",
+  "info": {
+    "title": "API V1",
+    "version": "v1"
+  },
+  "paths": {
+    "/readings": {
+      "post": {
+        "summary": "Creates a reading",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "reading",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "temperature": {
+                  "type": "number"
+                },
+                "humidity": {
+                  "type": "number"
+                },
+                "battery_charge": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "temperature",
+                "humidity",
+                "battery_charge"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "reading is about to be created",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "number": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "number"
+              ]
+            }
+          },
+          "404": {
+            "description": "invalid request"
+          }
+        }
+      }
+    },
+    "/readings/{id}": {
+      "get": {
+        "summary": "Retrieves a reading",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "reading found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "number": {
+                  "type": "string"
+                },
+                "temperature": {
+                  "type": "number"
+                },
+                "humidity": {
+                  "type": "number"
+                },
+                "battery_charge": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "number",
+                "temperature",
+                "humidity",
+                "battery_charge"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/stats/{id}": {
+      "get": {
+        "summary": "Retrieves a thermostat data",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "reading found",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "data": {
+                  "type": "json"
+                }
+              },
+              "required": [
+                "data"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

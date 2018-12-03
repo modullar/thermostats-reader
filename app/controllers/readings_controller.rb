@@ -14,7 +14,7 @@ class ReadingsController < ApplicationController
   # POST /readings
   def create
     push_to_worker
-    render json: {number: @next_number}, status: :created, location: {number: @next_number}
+    render json: {number: @next_number}, status: :ok, location: {number: @next_number}
   end
 
   private
@@ -35,6 +35,9 @@ class ReadingsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def reading_params
+      params.require(:reading).require(:temperature)
+      params.require(:reading).require(:humidity)
+      params.require(:reading).require(:battery_charge)
       params.require(:reading).permit(:temperature, :humidity, :battery_charge)
     end
 
